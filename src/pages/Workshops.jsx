@@ -78,7 +78,7 @@ export default function Workshops() {
                     <p>{ws.desc}</p>
                     <div className="workshop-page-footer">
                       <span className="workshop-page-price">{ws.price}</span>
-                      <a href="mailto:hello@eesha-art.studio?subject=Workshop Registration" className="btn-register">
+                      <a href="mailto:eeshaartstudio@gmail.com?subject=Workshop Registration" className="btn-register">
                         Register Now
                         <span className="material-symbols-outlined">arrow_forward</span>
                       </a>

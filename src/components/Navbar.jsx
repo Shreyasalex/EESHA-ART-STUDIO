@@ -39,20 +39,20 @@ export default function Navbar() {
           <Link to="/workshops" className="nav-link">Workshops</Link>
           
           <div className="mobile-actions">
-            <a href="mailto:hello@eesha-art.studio?subject=Ordering a Mandala" className="btn-nav-outline">
+            <a href="mailto:eeshaartstudio@gmail.com?subject=Ordering a Mandala" className="btn-nav-outline">
               Order Mandala
             </a>
-            <a href="mailto:hello@eesha-art.studio?subject=Booking a Workshop" className="btn-nav-cta">
+            <a href="mailto:eeshaartstudio@gmail.com?subject=Booking a Workshop" className="btn-nav-cta">
               Book Workshop
             </a>
           </div>
         </div>
 
         <div className="navbar-actions">
-          <a href="mailto:hello@eesha-art.studio?subject=Ordering a Mandala" className="btn-nav-outline desktop-only">
+          <a href="mailto:eeshaartstudio@gmail.com?subject=Ordering a Mandala" className="btn-nav-outline desktop-only">
             Order Mandala
           </a>
-          <a href="mailto:hello@eesha-art.studio?subject=Booking a Workshop" className="btn-nav-cta desktop-only">
+          <a href="mailto:eeshaartstudio@gmail.com?subject=Booking a Workshop" className="btn-nav-cta desktop-only">
             Book Workshop
           </a>
           

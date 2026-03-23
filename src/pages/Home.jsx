@@ -293,10 +293,10 @@ export default function Home() {
 
                   <div className="product-card-footer">
                     <span className="product-price">{product.price}</span>
-                    <button className="btn-enquire">
+                    <a href={`mailto:eeshaartstudio@gmail.com?subject=Enquiry for ${product.name}`} className="btn-enquire">
                       Enquire
                       <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>

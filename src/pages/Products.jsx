@@ -73,10 +73,10 @@ export default function Products() {
                     <div className="product-page-footer">
 
                     <span className="product-page-price">{product.price}</span>
-                    <button className="btn-enquire">
+                    <a href={`mailto:eeshaartstudio@gmail.com?subject=Enquiry for ${product.name}`} className="btn-enquire">
                       Enquire
                       <span className="material-symbols-outlined">arrow_forward</span>
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
