@@ -1,0 +1,292 @@
+/* ============================================
+   EESHA ART STUDIO — Global Design System
+   Royal Indian Palace Aesthetic
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&family=Noto+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+/* --- CSS Custom Properties --- */
+:root {
+  --primary: #d4af35;
+  --primary-rgb: 212, 175, 53;
+  --bg-light: #f8f7f6;
+  --bg-dark: #201d12;
+  --text-dark: #1e293b;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  --white: #ffffff;
+  --border-gold: rgba(212, 175, 53, 0.2);
+  --border-gold-strong: rgba(212, 175, 53, 0.4);
+  --shadow-gold: rgba(212, 175, 53, 0.2);
+
+  --font-display: 'Noto Serif', serif;
+  --font-body: 'Noto Sans', sans-serif;
+
+  --section-spacing: 140px;
+  --container-max: 1200px;
+  --transition-smooth: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles scroll */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-body);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+::selection {
+  background: rgba(var(--primary-rgb), 0.3);
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  font-weight: 900;
+  color: var(--text-dark);
+}
+
+/* --- Layout --- */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: var(--section-spacing) 0;
+  position: relative;
+}
+
+/* --- Utility Classes --- */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* --- Animations --- */
+@keyframes mandala-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 40px rgba(var(--primary-rgb), 0.2); }
+  50% { box-shadow: 0 0 60px rgba(var(--primary-rgb), 0.35); }
+}
+
+.mandala-spin {
+  animation: mandala-rotate 60s linear infinite;
+}
+
+.float-animation {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* --- Reusable Components --- */
+.palace-arch {
+  border-radius: 50% 50% 0 0 / 20% 20% 0 0;
+}
+
+.glass-effect {
+  background: rgba(248, 247, 246, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.gold-glow {
+  box-shadow: 0 0 40px rgba(var(--primary-rgb), 0.2);
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.marble-bg {
+  background-image: linear-gradient(to right, rgba(255,255,255,0.1), rgba(var(--primary-rgb),0.05));
+}
+
+/* --- Scroll reveal base state --- */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  will-change: transform, opacity;
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* --- Button Styles --- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary);
+  color: var(--bg-dark);
+  padding: 12px 32px; /* Reduced from 16px 40px */
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem; /* Reduced from 1.1rem */
+  box-shadow: 0 8px 30px rgba(var(--primary-rgb), 0.25);
+  transition: var(--transition-smooth);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(var(--primary-rgb), 0.4);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  color: var(--text-dark);
+  padding: 12px 32px; /* Reduced from 16px 40px */
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem; /* Reduced from 1.1rem */
+  border: 2px solid var(--border-gold);
+  transition: var(--transition-smooth);
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary);
+  transform: translateY(-3px);
+}
+
+.btn-see-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--primary);
+  padding: 14px 36px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  border: 2px solid var(--primary);
+  transition: var(--transition-smooth);
+}
+
+.btn-see-more:hover {
+  background: var(--primary);
+  color: var(--bg-dark);
+  transform: translateY(-2px);
+}
+
+/* --- Card Hover Effects --- */
+.card-hover {
+  transition: var(--transition-smooth);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1), 0 0 30px rgba(var(--primary-rgb), 0.15);
+}
+
+/* --- Section Divider --- */
+.section-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.section-header h2 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin-bottom: 16px;
+}
+
+.section-header .divider {
+  width: 96px;
+  height: 4px;
+  background: var(--primary);
+  margin: 0 auto;
+  border-radius: 50px;
+}
+
+.section-header p {
+  color: var(--text-muted);
+  margin-top: 16px;
+  font-size: 1.1rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  :root {
+    --section-spacing: 80px;
+  }
+  
+  .container {
+    padding: 0 20px;
+  }
+
+  .btn-primary, .btn-secondary {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-spacing: 60px;
+  }
+  
+  .container {
+    padding: 0 16px;
+  }
+
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.8rem; }
+}
+

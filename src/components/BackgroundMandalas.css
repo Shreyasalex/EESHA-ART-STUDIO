@@ -1,0 +1,23 @@
+.bg-mandala-container {
+  position: fixed;
+  inset: 0;
+  z-index: -1; /* Behind content */
+  pointer-events: none;
+  overflow: hidden;
+  background-color: var(--bg-light); 
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.bg-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 30%, rgba(var(--primary-rgb), 0.05) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+

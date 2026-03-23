@@ -1,0 +1,52 @@
+.static-bg-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--ivory); /* Maintain the base ivory background */
+}
+
+.bg-mandala {
+  position: absolute;
+  width: 60vmax;
+  height: 60vmax;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.8);
+  filter: grayscale(1) brightness(0.9); /* Keep it subtle and black/white as provided */
+}
+
+.corner-left {
+  top: -15%;
+  left: -15%;
+}
+
+.corner-right {
+  bottom: -15%;
+  right: -15%;
+}
+
+.bg-vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 40%, rgba(255, 255, 240, 0.4) 100%);
+  pointer-events: none;
+}
+
+/* Ensure sections are transparent so background shows */
+#hero, 
+#about, 
+.benefits-section, 
+.products-section, 
+.workshops-section, 
+.testimonials-section, 
+.contact-section {
+  background-color: transparent !important;
+}
