@@ -8,11 +8,11 @@ export const TESTIMONIALS = [
     text: 'I really enjoyed your session. It was very well conducted, and your choice of colors—especially the metallic tones—was perfectly balanced and truly enhanced the overall design. You gave clear and precise instructions, explaining the process thoughtfully and guiding us on the correct use of specific tools for the artwork.',
   },
   {
-    id: 3, name: 'MRS.RUCHI',
+    id: 3, name: 'MRS.KARIMA',
     text: 'Today, the session with Bindu was great! Very easy to follow, great instructions and helpful advice to master the various patterns. Thank you, Bindu.',
   },
   {
-    id: 4, name: 'MRS.RUCHI',
+    id: 4, name: 'MRS.MAMATHA',
     text: 'As u Said age is just a number .Initially I hesitated a lot to start this art.I just loved the way u hand held me to do all the steps initially. U r the best teacher anybody can get dear. God bless u child..',
   },
 ]
