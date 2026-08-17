@@ -9,6 +9,72 @@ import { TESTIMONIALS } from '../data/testimonials'
 
 gsap.registerPlugin(ScrollTrigger)
 
+// Section 2 — "Does this sound like you?" recognition lines
+const RECOGNITION_LINES = [
+  "I'm always doing something for everyone else.",
+  'My mind never switches off.',
+  'I want to learn something new.',
+  "I want something that's just mine.",
+]
+
+// Section 3 — "Discover Dot Mandala" process copy
+const DISCOVER_STEPS = [
+  {
+    step: 1,
+    title: 'A single dot',
+    text: 'Every mandala begins the same way — one dot, placed at the center. No pressure to get it "right," just a starting point.',
+  },
+  {
+    step: 2,
+    title: 'A pattern takes shape',
+    text: "Dot by dot, a rhythm builds outward. This is where the hour disappears — you're focused on the next dot, not the whole picture.",
+  },
+  {
+    step: 3,
+    title: 'A finished mandala',
+    text: "What began as one dot becomes a complete, radiating pattern — a quiet, tangible record of the hour you just spent with yourself.",
+  },
+]
+
+// Generates dot positions around a ring for the DotMandalaGlyph visual.
+// `fraction` < 1 leaves the ring visibly incomplete, for the "in progress" step.
+function ringDots(count, radius, fraction = 1, center = 100) {
+  const total = Math.round(count * fraction)
+  return Array.from({ length: total }, (_, i) => {
+    const angle = (i / count) * Math.PI * 2 - Math.PI / 2
+    return {
+      cx: center + radius * Math.cos(angle),
+      cy: center + radius * Math.sin(angle),
+    }
+  })
+}
+
+// Small inline SVG glyph used by the Section 3 process visual — draws the
+// mandala with progressively more dot-rings so no new photography is needed.
+function DotMandalaGlyph({ stage }) {
+  const ringConfigs = {
+    1: [],
+    2: [{ count: 8, radius: 38, fraction: 1 }, { count: 14, radius: 66, fraction: 0.5 }],
+    3: [
+      { count: 8, radius: 38, fraction: 1 },
+      { count: 14, radius: 66, fraction: 1 },
+      { count: 20, radius: 92, fraction: 1 },
+    ],
+  }[stage] || []
+
+  return (
+    <svg viewBox="0 0 200 200" className="discover-glyph" aria-hidden="true">
+      <circle cx="100" cy="100" r="96" className="discover-glyph-guide" />
+      {ringConfigs.map((ring, ringIndex) =>
+        ringDots(ring.count, ring.radius, ring.fraction).map((dot, i) => (
+          <circle key={`${ringIndex}-${i}`} cx={dot.cx} cy={dot.cy} r="4" className="discover-glyph-dot" />
+        ))
+      )}
+      <circle cx="100" cy="100" r="7" className="discover-glyph-dot discover-glyph-dot-center" />
+    </svg>
+  )
+}
+
 // Image URLs from original code.html
 // Image URLs from original code.html and high-quality local assets
 const IMAGES = {
@@ -167,13 +233,18 @@ export default function Home() {
         <div className="container hero-content">
           <div className="hero-text">
             <h1>
-              Sacred Geometry meets <br />
-              <span className="text-gold italic">Indian Heritage</span>
+              You don't need another hour of scrolling. <br />
+              <span className="text-gold italic">You need an hour for yourself.</span>
             </h1>
             <p>
-              Experience the divine fusion of ancient mandalas and royal Indian aesthetics
-              in a modern digital sanctuary. Handcrafted for the soul.
+              For the ones who give their time to everyone else, Dot Mandala art offers one
+              guided hour that belongs entirely to you — no experience needed, just dots,
+              patterns, and a little quiet.
             </p>
+            <a href="#offer" className="btn-primary hero-cta">
+              Start Your Dot Mandala Journey
+              <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_forward</span>
+            </a>
             <div className="hero-scroll-indicator scroll-reveal">
               <div className="mouse">
                 <div className="wheel"></div>
@@ -184,7 +255,89 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== SECTION 2: ABOUT / ARTIST & HER ART ===== */}
+      {/* ===== SECTION 2: DOES THIS SOUND LIKE YOU? =====
+          Goal: WHO this is for. Pure recognition, no CTA — keep it text-forward and quiet. */}
+      <section className="section recognition-section" id="recognition">
+        <div className="container">
+          <div className="section-header scroll-reveal">
+            <h2>Does this sound like you?</h2>
+            <div className="divider"></div>
+          </div>
+          <div className="recognition-grid">
+            {RECOGNITION_LINES.map((line, i) => (
+              <div key={i} className="recognition-card scroll-reveal">
+                <span className="recognition-quote-mark">&ldquo;</span>
+                <p>{line}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== SECTION 3: DISCOVER DOT MANDALA =====
+          Goal: WHAT this is, in plain language, shown as a visual process (not just described). */}
+      <section className="section discover-section" id="discover">
+        <div className="container">
+          <div className="discover-intro scroll-reveal">
+            <span className="section-tag">The Practice</span>
+            <h2>Discover Dot Mandala</h2>
+            <p>
+              Dot Mandala art is exactly what it sounds like: you place small dots, one at a
+              time, in circular patterns that grow outward from a single point. There's no
+              drawing skill required — just a fine tool, a little paint, and a steady, unhurried
+              rhythm. {/* TODO(Bindu): confirm exact tools/materials used in a real session (stylus type, paint brand, surface — canvas/wood/stone) so this stays accurate. */}
+            </p>
+            <p>
+              What makes it meditative rather than "just art" is the repetition. Each dot asks
+              for nothing but your attention to this one, right now — and by the time a pattern
+              has taken shape, your mind has usually gone quiet too.
+            </p>
+          </div>
+
+          <div className="discover-steps">
+            {DISCOVER_STEPS.map((step) => (
+              <div key={step.step} className="discover-step scroll-reveal">
+                <div className="discover-step-visual">
+                  <DotMandalaGlyph stage={step.step} />
+                </div>
+                <span className="discover-step-index">0{step.step}</span>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================================
+          TODO — NEXT PASS: Sections 4–10
+          Build in sequence once 1–3 are reviewed:
+            4. What You'll Learn        — scannable grid of real curriculum/skill
+                                           points (get list from Bindu — do not invent).
+            5. Your Transformation      — Stress → Focus → Creativity → Confidence,
+                                           shown as a sequenced visual journey.
+            6. Meet Bindu                — reposition existing About section content
+                                           (below) here; rewrite as first-person story.
+                                           NOTE: existing body copy says Bengaluru,
+                                           Karnataka, but site meta/OG tags say Jaipur —
+                                           flag to Bindu to confirm correct location
+                                           before this section is finalized.
+            7. Student Transformations   — reposition existing Testimonials section
+                                           (below) here; TESTIMONIALS data has real
+                                           quotes but no `role` field used by the
+                                           template — confirm with Bindu or remove.
+            8. Choose Your Journey       — pricing tiers (₹299/₹499 entry, ₹6,000–10,000
+                                           core, Advanced tier). Needs id="offer" so the
+                                           hero + closing CTA anchor links resolve.
+                                           Do not invent tier inclusions — confirm with Bindu.
+            9. FAQ                       — accordion (new component); content from Bindu.
+            10. Start Today              — closing CTA, echoes Section 1 headline,
+                                           links to #offer or direct enrollment.
+          Existing sections below (About, Benefits, Products, Workshops, Testimonials,
+          Contact) are left functioning as-is until reorganized into the structure above.
+      ===================================================================== */}
+
+      {/* ===== LEGACY: ABOUT / ARTIST & HER ART (destined for Section 6 — Meet Bindu) ===== */}
       <section className="section about-section" id="about">
         <div className="container">
           <div className="about-grid scroll-reveal">
@@ -226,7 +379,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== SECTION 3: MANDALA BENEFITS (Sticky Horizontal Scroll) ===== */}
+      {/* ===== LEGACY: MANDALA BENEFITS, Sticky Horizontal Scroll (candidate content for Section 5 — Your Transformation) ===== */}
       <section ref={benefitsPinRef} className="section benefits-section">
         <div className="container" style={{ maxWidth: '100%' }}>
           <div className="section-header">
@@ -270,7 +423,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== SECTION 4: TOP PRODUCTS ===== */}
+      {/* ===== LEGACY: TOP PRODUCTS (not part of the 10-section funnel — keep, revisit placement in next pass) ===== */}
       <section className="section products-section">
         <div className="container">
           <div className="section-header scroll-reveal">
@@ -311,7 +464,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== SECTION 5: WORKSHOPS ===== */}
+      {/* ===== LEGACY: WORKSHOPS (candidate content for Section 8 — Choose Your Journey) ===== */}
       <section className="section workshops-section">
         <div className="container">
           <div className="section-header scroll-reveal">
@@ -355,7 +508,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== SECTION 6: TESTIMONIALS (3D Zoom Scroll) ===== */}
+      {/* ===== LEGACY: TESTIMONIALS, 3D Zoom Scroll (destined for Section 7 — Student Transformations) ===== */}
       <section ref={testimonialsPinRef} className="section testimonials-section">
         <div className="container testimonials-grid">
           <div className="testimonials-left">
@@ -383,7 +536,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== SECTION 7: CONTACT ===== */}
+      {/* ===== LEGACY: CONTACT (destined for/superseded by Section 10 — Start Today) ===== */}
       <section className="section contact-section">
         <div className="container">
           <div className="contact-inner scroll-reveal">
