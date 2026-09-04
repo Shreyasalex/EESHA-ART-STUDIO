@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -10,37 +11,50 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
 }
 
+const HeroScene = dynamic(() => import('./HeroScene'), { ssr: false })
+
 export default function Hero() {
   const sectionRef = useRef(null)
   const textRef = useRef(null)
+  const progressRef = useRef(0)
 
   useEffect(() => {
     const mm = gsap.matchMedia()
     mm.add('(prefers-reduced-motion: no-preference)', () => {
+      const st = ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: 'top top',
+        end: '+=140%',
+        scrub: 1,
+        pin: true,
+        onUpdate: (self) => {
+          progressRef.current = self.progress
+        },
+      })
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
-          end: '+=60%',
+          end: '+=50%',
           scrub: 1,
         },
       })
       tl.to(textRef.current, { opacity: 0, y: -40, ease: 'none' })
-      return () => tl.scrollTrigger?.kill()
+
+      return () => {
+        st.kill()
+        tl.scrollTrigger?.kill()
+      }
     })
     return () => mm.revert()
   }, [])
 
   return (
     <section ref={sectionRef} data-nav-theme="light" className="relative h-screen w-full overflow-hidden text-ink">
-      {/* TODO: replace with the real hero photograph (hand painting a dot mandala amid brass vase, books, pigment bowls) */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(120% 90% at 20% 15%, rgba(227,201,163,0.55) 0%, transparent 55%), radial-gradient(110% 90% at 85% 75%, rgba(205,154,63,0.25) 0%, transparent 55%), var(--color-cream)',
-        }}
-      />
+      <div className="absolute inset-0 bg-cream">
+        <HeroScene progressRef={progressRef} />
+      </div>
 
       <div ref={textRef} className="relative z-10 h-full">
         <div className="container-studio h-full flex flex-col justify-center max-w-none">
