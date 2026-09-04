@@ -1,8 +1,8 @@
 export const NAV_LINKS = [
   { label: 'Courses', href: '/courses' },
-  { label: 'Gallery', href: '/gallery' },
+  { label: 'About', href: '/about' },
   { label: "Founder's Story", href: '/founders-story' },
-  { label: 'Journal', href: '/journal' },
+  { label: 'Gallery', href: '/gallery' },
   { label: 'Contact', href: '/contact' },
 ]
 
@@ -10,6 +10,18 @@ export const NEXT_WORKSHOP = {
   title: 'Dot Mandala — Beginners Circle',
   date: 'Sat, 20 Sep',
   format: 'Live Online · 2 hrs',
+}
+
+export const HERO_CONTENT = {
+  eyebrow: 'Turning creativity into\nconfidence, healing & opportunity',
+  headline1: 'One Dot',
+  headline2: 'at a ',
+  headlineAccent: 'Time.',
+  subtext:
+    'Discover the art of Dot Mandala, Tanjore Painting\nBrush Strokes & more — step by step, with confidence.',
+  cta: 'Start Creating',
+  tags: ['Art', 'Mindfulness', 'Tradition', 'A Brighter You'],
+  sideText: 'More than art. A kinder you.',
 }
 
 export const MANIFESTO =

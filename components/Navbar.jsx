@@ -64,10 +64,15 @@ export default function Navbar() {
       >
         <div className="container-studio flex items-center justify-between h-[84px]">
           <Link href="/" className="flex items-center gap-2.5 shrink-0">
-            <MandalaMark size={30} className="text-gold" />
-            <span className="font-sans font-bold tracking-[0.18em] text-[0.82rem] sm:text-[0.92rem]">
-              EESHAARTSTUDIO
-            </span>
+            <MandalaMark size={28} className="text-gold hidden sm:block" />
+            <div className="flex flex-col leading-tight">
+              <span className="font-sans font-bold tracking-[0.14em] text-[0.8rem] sm:text-[0.88rem]">
+                EESHAARTSTUDIO
+              </span>
+              <span className="font-sans text-[0.58rem] tracking-[0.22em] uppercase opacity-60 mt-0.5">
+                Learn · Create · Grow.
+              </span>
+            </div>
           </Link>
 
           <div className="hidden lg:flex items-center gap-9">
@@ -75,7 +80,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="relative text-sm font-medium tracking-wide group py-2"
+                className="relative text-xs font-bold tracking-[0.1em] uppercase group py-2"
               >
                 {link.label}
                 <span className="absolute left-0 -bottom-0.5 h-px w-full bg-gold origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-400 ease-silk" />
@@ -86,28 +91,29 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <a
               href={`mailto:${CONTACT.email}?subject=Begin My Journey`}
-              className={`hidden md:inline-flex items-center border rounded-full px-5 py-2 text-xs font-bold tracking-[0.12em] uppercase transition-colors duration-400 ease-silk ${
+              className={`hidden md:inline-flex items-center gap-2 border rounded-full px-5 py-2.5 text-xs font-bold tracking-[0.1em] uppercase transition-colors duration-400 ease-silk ${
                 isDark
                   ? 'border-cream/50 hover:bg-cream hover:text-ink'
                   : 'border-ink/40 hover:bg-ink hover:text-cream'
               }`}
             >
               Begin Your Journey
+              <span aria-hidden>→</span>
             </a>
             <button
               aria-label="Toggle Menu"
               onClick={() => setIsMenuOpen((v) => !v)}
-              className="relative w-9 h-9 flex flex-col items-center justify-center gap-[6px] z-[60]"
+              className="relative w-6 h-6 flex flex-col items-center justify-center gap-[5px] z-[60]"
             >
               <span
-                className={`block h-px w-6 bg-current transition-transform duration-400 ease-silk ${
-                  isMenuOpen ? 'translate-y-[3.5px] rotate-45' : ''
+                className={`block h-px w-5 bg-current transition-transform duration-400 ease-silk ${
+                  isMenuOpen ? 'translate-y-[3px] rotate-45' : ''
                 }`}
                 style={{ background: isMenuOpen ? 'var(--color-ink)' : 'currentColor' }}
               />
               <span
-                className={`block h-px w-6 bg-current transition-transform duration-400 ease-silk ${
-                  isMenuOpen ? '-translate-y-[3.5px] -rotate-45' : ''
+                className={`block h-px w-5 bg-current transition-transform duration-400 ease-silk ${
+                  isMenuOpen ? '-translate-y-[3px] -rotate-45' : ''
                 }`}
                 style={{ background: isMenuOpen ? 'var(--color-ink)' : 'currentColor' }}
               />

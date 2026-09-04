@@ -1,11 +1,10 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { NEXT_WORKSHOP } from '../../data/site'
+import { HERO_CONTENT } from '../../data/site'
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
@@ -22,81 +21,93 @@ export default function Hero() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
-          end: '+=90%',
+          end: '+=60%',
           scrub: 1,
-          pin: true,
         },
       })
-      tl.to(textRef.current, { opacity: 0, y: -60, scale: 0.94, ease: 'none' })
+      tl.to(textRef.current, { opacity: 0, y: -40, ease: 'none' })
       return () => tl.scrollTrigger?.kill()
     })
     return () => mm.revert()
   }, [])
 
   return (
-    <section
-      ref={sectionRef}
-      data-nav-theme="dark"
-      className="relative h-screen w-full overflow-hidden text-cream"
-    >
-      <Image
-        src="/EESHA PRODUCT IMAGES/PRODUCT 1.jpeg"
-        alt="Hand-painted dot mandala artwork"
-        fill
-        priority
-        className="object-cover"
-      />
-      <div className="absolute inset-0 bg-ink/55" />
+    <section ref={sectionRef} data-nav-theme="light" className="relative h-screen w-full overflow-hidden text-ink">
+      {/* TODO: replace with the real hero photograph (hand painting a dot mandala amid brass vase, books, pigment bowls) */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(120% 90% at 15% 100%, rgba(205,154,63,0.45) 0%, transparent 55%), radial-gradient(110% 80% at 90% 0%, rgba(143,191,187,0.35) 0%, transparent 55%)',
+            'radial-gradient(120% 90% at 20% 15%, rgba(227,201,163,0.55) 0%, transparent 55%), radial-gradient(110% 90% at 85% 75%, rgba(205,154,63,0.25) 0%, transparent 55%), var(--color-cream)',
         }}
       />
 
-      <div
-        ref={textRef}
-        className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6"
-      >
-        <span className="eyebrow text-sandal mb-6">EeshaArtStudio · Bengaluru</span>
-        <h1 className="font-serif text-[clamp(2.8rem,9vw,7.5rem)] leading-[0.98] max-w-5xl">
-          One Dot
-          <br />
-          <span className="italic text-gold">at a Time</span>
-        </h1>
-        <p className="mt-7 max-w-xl text-[1.05rem] text-cream/80 leading-relaxed">
-          Dot mandala, Tanjore painting, and brush strokes — taught by Dr. Bindu Lavanya as a
-          living craft, one patient circle at a time.
-        </p>
+      <div ref={textRef} className="relative z-10 h-full">
+        <div className="container-studio h-full flex flex-col justify-center max-w-none">
+          <div className="max-w-xl">
+            <div className="flex items-center gap-3 mb-7">
+              <span className="w-8 h-px bg-ink/50" />
+              <span className="text-[0.72rem] font-bold tracking-[0.22em] uppercase text-ink/70 leading-relaxed whitespace-pre-line">
+                {HERO_CONTENT.eyebrow}
+              </span>
+            </div>
 
-        <div className="mt-14 flex flex-col items-center gap-3 opacity-80">
-          <div className="w-6 h-10 rounded-full border border-cream/60 relative">
-            <span className="absolute left-1/2 top-2 -translate-x-1/2 w-[3px] h-[6px] rounded-full bg-cream animate-bounce" />
+            <h1 className="font-serif text-[clamp(3rem,7vw,5.6rem)] leading-[0.98] text-ink">
+              {HERO_CONTENT.headline1}
+              <br />
+              {HERO_CONTENT.headline2}
+              <span className="text-gold">{HERO_CONTENT.headlineAccent}</span>
+            </h1>
+
+            <p className="mt-7 text-ink/75 text-[1.05rem] leading-relaxed whitespace-pre-line">
+              {HERO_CONTENT.subtext}
+            </p>
+
+            <motion.a
+              href="#courses"
+              whileHover={{ x: 4 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-10 inline-flex items-center gap-3 border border-ink/50 rounded-full px-7 py-3.5 text-xs font-bold tracking-[0.14em] uppercase hover:bg-ink hover:text-cream hover:border-ink transition-colors duration-400 ease-silk"
+            >
+              {HERO_CONTENT.cta}
+              <span aria-hidden>→</span>
+            </motion.a>
           </div>
-          <span className="text-[0.65rem] tracking-[0.3em] uppercase text-cream/60">Scroll</span>
+        </div>
+
+        {/* bottom-left icon + value tags */}
+        <div className="absolute left-6 sm:left-[calc((100vw-1320px)/2+24px)] bottom-10 flex items-center gap-4">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="text-gold shrink-0">
+            <path
+              d="M12 21c0-5-4-7-4-11a4 4 0 0 1 8 0c0 4-4 6-4 11Z"
+              stroke="currentColor"
+              strokeWidth="1.2"
+            />
+            <path d="M12 21V13" stroke="currentColor" strokeWidth="1.2" />
+          </svg>
+          <ul className="text-[0.62rem] font-bold tracking-[0.16em] uppercase text-ink/70 leading-[1.7]">
+            {HERO_CONTENT.tags.map((tag) => (
+              <li key={tag}>{tag}</li>
+            ))}
+          </ul>
+        </div>
+
+        {/* right-edge vertical text */}
+        <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2">
+          <span
+            className="text-[0.62rem] font-bold tracking-[0.22em] uppercase text-ink/60 whitespace-nowrap"
+            style={{ writingMode: 'vertical-rl' }}
+          >
+            {HERO_CONTENT.sideText}
+          </span>
+        </div>
+
+        {/* bottom-center scroll indicator */}
+        <div className="absolute left-1/2 -translate-x-1/2 bottom-8 flex flex-col items-center gap-3">
+          <span className="text-[0.62rem] font-bold tracking-[0.28em] uppercase text-ink/60">Scroll</span>
+          <span className="w-px h-8 bg-ink/30" />
         </div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.6 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-        className="absolute bottom-10 right-6 sm:right-10 z-10 w-[min(88vw,300px)] group"
-      >
-        <div className="bg-cream/95 text-ink rounded-md p-5 border border-gold/40">
-          <span className="eyebrow mb-3">Next Workshop</span>
-          <h3 className="font-serif text-xl mb-1">{NEXT_WORKSHOP.title}</h3>
-          <div className="flex items-center justify-between mt-4 text-sm text-ink/70">
-            <span>{NEXT_WORKSHOP.date}</span>
-            <span>{NEXT_WORKSHOP.format}</span>
-          </div>
-          <div className="mt-4 h-px w-full bg-gold/30 relative overflow-hidden">
-            <span className="absolute inset-y-0 left-0 w-0 group-hover:w-full bg-gold transition-all duration-700 ease-silk" />
-          </div>
-        </div>
-      </motion.div>
     </section>
   )
 }
